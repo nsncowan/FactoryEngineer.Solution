@@ -26,7 +26,6 @@ namespace Factory.Controllers
                                       .Include(machine => machine.JoinEntities)
                                       .ThenInclude(license => license.Engineer)
                                       .FirstOrDefault(machine => machine.MachineId == id);
-      // ViewBag.PassFail = new SelectList(_db.StudentCourses, "StudentCourseId", "PassFail");
       return View(thisMachine);
     }
     public ActionResult Create()

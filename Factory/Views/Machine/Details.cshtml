@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models
+@model Factory.Models.Machine
+
+<h2>Machine Details</h2>
+
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+@if(Model.JoinEntities.Count == 0)
+{
+  <h3>No Engineers have been assigned to this machine yet.</h3>
+}
+else
+{
+  <h3>Engineers:</h3>
+  <ul>
+    @foreach(License license in Model.JoinEntities)
+    {
+      <li>@license.Engineer.Name</li>
+    }
+  </ul>
+}
+<p><a href="#" class="link-secondary">@Html.ActionLink("Add a engineer for this machine", "AddEngineer", new {id = Model.MachineId})</a></p>
+<p><a href="#" class="link-secondary">@Html.ActionLink("Edit machine information", "Edit", new {id= Model.MachineId})</a></p>
+<p><a href="#" class="link-secondary">@Html.ActionLink("Delete machine", "Delete", new {id = Model.MachineId})</a></p>
