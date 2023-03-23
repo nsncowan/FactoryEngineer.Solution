@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models;
+@model Factory.Models.Engineer;
+
+<h1>Engineer Info</h1>
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
+
+@if(Model.JoinEntities.Count == 0)
+{
+  <h3>No students have been added to this course yet.</h3>
+}
+else
+{
+  <h3>Engineers on staff:</h3>
+  <ul>
+    @foreach (License license in Model.JoinEntities)
+    {
+      <li>@license.Engineer.Name</li>
+    }
+  </ul>
+}
+<p>@Html.ActionLink("Add a new license to this  engineer", "AddEngineerLicense", new { id = Model.EngineerId})</p>
+

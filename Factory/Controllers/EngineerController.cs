@@ -28,5 +28,35 @@ namespace Factory.Controllers
                                   .FirstOrDefault(engineer => engineer.EngineerId == id);
       return View(thisEngineer);
     }
+
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Engineer engineer)
+    {
+      _db.Engineers.Add(engineer);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddMachine(int id)
+    {
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
+      return View(thisEngineer);
+    }
+
+
+
+
+
+
+
+
+
+
   }
 }
