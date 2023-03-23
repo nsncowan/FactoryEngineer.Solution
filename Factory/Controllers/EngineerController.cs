@@ -49,6 +49,21 @@ namespace Factory.Controllers
       return View(thisEngineer);
     }
 
+    [HttpPost]
+    public ActionResult AddMachine(Engineer engineer, int machineId)
+    {
+      #nullable enable
+      License? joinEntity = _db.Licenses.FirstOrDefault(license => (license.MachineId == machineId && license.EngineerId == engineer.EngineerId));
+      #nullable disable
+      if(joinEntity == null && machineId != 0)
+      {
+        
+        _db.Licenses.Add(new License() {EngineerId = engineer.EngineerId, MachineId = machineId});
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new {id = engineer.EngineerId});
+    }
+
 
 
 
