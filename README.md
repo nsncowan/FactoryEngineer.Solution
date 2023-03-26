@@ -52,13 +52,14 @@ $ dotnet tool install -g dotnet-script
 ```
 6. Replace [uid] and [pwd] with your created SQL username and password respectively (excluding the braces).
 
-### Import the Database
-1. Open MySQL Workbench and find the Navigator pane on the left side of the window.
-2. Select "Data Import/Restore", which opens Data Import page.
-3. Select the option labeled "Import from Self Contained File". Navigate to the top level of directory of files you downloaded from this repository ("FactoryEngineer.Solution").
-4. Within "FactoryEngineer.Solution", select the file named noah_cowan
-5. Underneath "Default Schema to be Imported To", click the "New..." button, input the database name (noah_cowan.sql), and click "OK".
-6. Go to the "Start Import" button in the lower right corner of the Data Import Pane.
+### Create the Database with Entity Framework Migrations
+1. Open your terminal to your local root directory and install ef migrations: 
+  run: "dotnet tool install --global dotnet-ef --version 6.0.0"
+2. In the project directory, run the following command to install Entity Framework Core Design:
+  "dotnet add package Microsoft.EntityFrameworkCore.Design -v 6.0.0"
+3. When you're you're ready to create the database, run the following two commands in the project directory:
+  "dotnet ef migrations add initial"
+  "dotnet ef database update"
 
 ### Execute the Program
 1. Open the terminal and navigate to the production direction titled Factory.
