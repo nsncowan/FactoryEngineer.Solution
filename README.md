@@ -1,6 +1,6 @@
-# Eau Claire's Salon
+# Dr. Sillystringz's Factory 
 
-#### MVC web application for a hair salon - manage stylists and clients!
+#### MVC web application for a factory management app!
 
 ## Authored by: 
 
