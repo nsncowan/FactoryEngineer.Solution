@@ -10,7 +10,7 @@ Noah Cowan, March 2023
 
 ## Description:
 
-This is an MVC web application writted in C#, using the ASP.NET core framework. The app uses Entity Framework Core to communicate with a database created with mySQL workbench. Upon launching the app, a browser window will open to a splash page where a user can follow links to create stylists, add clients to the staylists' roster, and delete or edit stylists and clients. 
+This is an MVC web application writted in C#, using the ASP.NET core framework. The app uses Entity Framework Core migrations to build a SQL database. Upon launching the app, a browser window will open to a splash page where a user can follow links to create engineers and machines to populate a factory management app. Using a many-to-many database relationship, the user can assign engineers to any number of machines to maintain, and conversly, assign machines to be maintained by any number of engineers. Engineers and Machines can also be created and deleted. 
 ***
 
 ## Technologies Used
