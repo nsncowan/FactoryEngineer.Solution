@@ -20,14 +20,6 @@ namespace Factory.Controllers
       return View(_db.Machines.ToList());
     }
 
-    public ActionResult Details(int id)
-    {
-      Machine thisMachine = _db.Machines
-                                      .Include(machine => machine.JoinEntities)
-                                      .ThenInclude(license => license.Engineer)
-                                      .FirstOrDefault(machine => machine.MachineId == id);
-      return View(thisMachine);
-    }
     public ActionResult Create()
     {
       return View();
@@ -41,25 +33,13 @@ namespace Factory.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddEngineer(int id)
+    public ActionResult Details(int id)
     {
-      Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
-      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
+      Machine thisMachine = _db.Machines
+                                      .Include(machine => machine.JoinEntities)
+                                      .ThenInclude(license => license.Engineer)
+                                      .FirstOrDefault(machine => machine.MachineId == id);
       return View(thisMachine);
-    }
-     
-    [HttpPost]
-    public ActionResult AddEngineer(Machine machine, int engineerId)
-    {
-       #nullable enable
-       License? joinEntity = _db.Licenses.FirstOrDefault(license => (license.EngineerId == engineerId && license.MachineId == machine.MachineId));
-       #nullable disable
-       if(joinEntity == null && engineerId !=0)
-       {
-        _db.Licenses.Add(new License() {MachineId = machine.MachineId, EngineerId = engineerId});
-        _db.SaveChanges();
-       }
-       return RedirectToAction("Details", new { id = machine.MachineId});
     }
 
     public ActionResult Edit(int id)
@@ -91,6 +71,26 @@ namespace Factory.Controllers
     return RedirectToAction("Index");
     }
 
+    public ActionResult AddEngineer(int id)
+    {
+      Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
+      return View(thisMachine);
+    }
+     
+    [HttpPost]
+    public ActionResult AddEngineer(Machine machine, int engineerId)
+    {
+       #nullable enable
+       License? joinEntity = _db.Licenses.FirstOrDefault(license => (license.EngineerId == engineerId && license.MachineId == machine.MachineId));
+       #nullable disable
+       if(joinEntity == null && engineerId !=0)
+       {
+        _db.Licenses.Add(new License() {MachineId = machine.MachineId, EngineerId = engineerId});
+        _db.SaveChanges();
+       }
+       return RedirectToAction("Details", new { id = machine.MachineId});
+    }
 
   }
 }

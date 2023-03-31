@@ -14,11 +14,11 @@
 }
 else
 {
-  <h3>Engineers on staff:</h3>
+  <h3>This engineer is licensed to work on:</h3>
   <ul>
     @foreach (License license in Model.JoinEntities)
     {
-      <li>@license.Engineer.Name</li>
+      <li>@license.Machine.Name</li>
     }
   </ul>
 }
